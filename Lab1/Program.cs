@@ -10,49 +10,56 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            //Find area & perimeter of Room 1, get user inputs length and width 
-            Console.WriteLine("Welcome to Grand Circus' Room Detail Generator! \n We will start with the dimensions for Room 1...");
-            Console.WriteLine("Please enter the length of room 1: ");
-            string length1 = Console.ReadLine();
+            Console.WriteLine("Welcome to the Room Area & Perimeter Generator! \n \nWe will start with the dimensions for Room 1...");
+           
+            string prompt = "y";
 
-            //convert input string to double
-            double lengthOne = Convert.ToDouble(length1);
+            int x = 1;
 
-            Console.WriteLine("Please enter the width of room 1: ");
-            string width1 = Console.ReadLine();
-            double widthOne = Convert.ToDouble(width1);
+            //Run every time user enters y
+            while (prompt == "y")
+                {
+                Console.Write("\nPlease enter the LENGTH of Room {0}: ", x);
+                string lengthString = Console.ReadLine();
 
-            //calc area and perimeter then display
-            double area1 = lengthOne * widthOne;
-            double perim1 = 2 * (lengthOne + widthOne);
-            Console.WriteLine("The area of Room 1 is: " + area1);
-            Console.WriteLine("The perimeter of Room 1 is: " +  perim1 );
+                //Convert input string to double
+                double length = Convert.ToDouble(lengthString);
+
+                Console.Write("\nPlease enter the WIDTH of Room {0}: ", x);
+                string widthString = Console.ReadLine();
+                double width = Convert.ToDouble(widthString);
+
+                Area(length, width, x);
+
+                x += 1;
+                //Give user option to continue
+                Console.Write("\nDo you want to continue?(y/n): ");
+                prompt = Convert.ToString(Console.ReadLine()).ToLower();
+                }
             
-            //Give user option to continue
-            Console.Write("Do you want to continue?(y/n): " );
-            string prompt = Console.ReadLine();
-
-            //When user answers yes, find area & perimeter of Room 2
-            if (prompt == "y")
-
-            {
-                Console.WriteLine("Please enter the length of Room 2: ");
-
-                string length2 = Console.ReadLine();
-                double lengthTwo = Convert.ToDouble(length2);
-
-                Console.WriteLine("Please enter the width of Room 2: ");
-                string width2 = Console.ReadLine();
-                double widthTwo = Convert.ToDouble(width2);
-
-                double area2 = lengthTwo * widthTwo;
-                double perim2 = 2 * (lengthTwo + widthTwo);
-                Console.WriteLine("The area of Room 2 is: " + area2);
-                Console.WriteLine("The perimeter of Room 2 is: " + perim2);
-            }
-                //User does not want to continue:
-             else
+            //User does not want to continue + validation
+            if (prompt == "n" && prompt.Length < 2 && prompt.Length > 0)
+                {
                 Console.WriteLine("Exiting program now...");
+                }
+           //If user inputs anything other than y/n
+            else
+            {
+                Console.WriteLine("Your input was invalid, Exiting program now...");
+            }     
+        }
+
+
+      //Method to calculate area
+        public static void Area(double length, double width, int x)
+        {
+            double area = length * width;
+
+            double perim = 2 * (length + width);
+
+            Console.WriteLine($"\nThe area of Room {x} is: " + area);
+
+            Console.WriteLine($"\nThe perimeter of Room {x} is: " + perim);
         }
     }
 }
